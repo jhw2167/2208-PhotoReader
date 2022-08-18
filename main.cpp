@@ -1,7 +1,7 @@
 /* Photo Reader main.cpp */
 #include "main.h"
 
-const unordered_set<string> VALID_TYPES{ ".png", ".jpg" };
+const unordered_set<string> VALID_TYPES{ ".png", ".jpg", ".jpeg" };
 
 
 bool validFile(fs::path file) {
