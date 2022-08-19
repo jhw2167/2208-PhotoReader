@@ -1,8 +1,11 @@
 /* Photo Reader main.cpp */
-#include "main.h"
+#include "Photo.h"
 
+//Stubbs
+
+
+//Global Vals
 const unordered_set<string> VALID_TYPES{ ".png", ".jpg", ".jpeg" };
-
 
 bool validFile(fs::path file) {
     string ext = boost::algorithm::to_lower_copy(file.extension().u8string());
@@ -34,17 +37,7 @@ int main()
             continue;
         }
         
-        // open a stream to read just the necessary parts of the image file
-        std::ifstream istream(entry.path(), std::ifstream::binary);
-
-        // parse image EXIF and XMP metadata
-        TinyEXIF::EXIFInfo imageEXIF(istream);
-        if (imageEXIF.Fields)
-            std::cout
-            << "Image Description " << imageEXIF.ImageDescription << "\n"
-            << "Image Resolution " << imageEXIF.ImageWidth << "x" << imageEXIF.ImageHeight << " pixels\n"
-            << "Camera Model " << imageEXIF.Make << " - " << imageEXIF.Model << "\n"
-            << "Focal Length " << imageEXIF.FocalLength << " mm" << std::endl;
+        
         //Open, read image, write image as JSON, next
 
         cout << filename << endl;
@@ -54,4 +47,38 @@ int main()
     //close and exit
 
     return 0;
+}
+
+
+
+
+//Read .jpeg data
+boolean readJpeg(fs::path path) {
+
+    // open a stream to read just the necessary parts of the image file
+    std::ifstream istream(path, std::ifstream::binary);
+
+    // parse image EXIF and XMP metadata
+    TinyEXIF::EXIFInfo imageEXIF(istream);
+    if (imageEXIF.Fields) {
+        Photo p = Photo(imageEXIF);
+    }
+    else {
+        return false;
+    }
+    istream.close();
+    
+    return true;
+}
+
+
+//read .png data
+boolean readPng(fs::path path) {
+    sf::Image img;
+    if (!img.loadFromFile(path.u8string())) {
+        cout << "File: " << path << " could not be loaded\n";
+        return false;
+    }
+
+    return true;
 }

@@ -1,8 +1,8 @@
-#pragma once
-
-
 //Precompiled Header for Project
 #pragma once
+
+#ifndef __MAIN_H__
+#define __MAIN_H__
 
 //SFML includes
 #include <SFML/Graphics.hpp>
@@ -52,14 +52,16 @@
 
 //Libs
 #include <boost/algorithm/string.hpp>
+#include  <boost/format.hpp>
 #include "TinyEXIF.h"
+#include <nlohmann/json.hpp>
 
 //Other
 #include <ctime>
 #include <memory>
 
 //JSON
-#include <nlohmann/json.hpp>
+
 
 
 //Project includes
@@ -68,3 +70,8 @@
 //Usings
 using namespace std;
 namespace fs = std::filesystem;
+using json = nlohmann::json;
+
+
+
+#endif

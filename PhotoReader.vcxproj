@@ -147,10 +147,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Photo.cpp" />
     <ClCompile Include="TinyEXIF.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />
+    <ClInclude Include="Photo.h" />
     <ClInclude Include="TinyEXIF.h" />
   </ItemGroup>
   <ItemGroup>
