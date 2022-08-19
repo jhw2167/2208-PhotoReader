@@ -34,19 +34,22 @@ int main()
             continue;
         }
         
-        sf::Image img;
-        if (!img.loadFromFile(entry.path().string())) {
-            cout << "File: " << filename << " could not be loaded\n";
-            continue;
-        }
+        // open a stream to read just the necessary parts of the image file
+        std::ifstream istream(entry.path(), std::ifstream::binary);
+
+        // parse image EXIF and XMP metadata
+        TinyEXIF::EXIFInfo imageEXIF(istream);
+        if (imageEXIF.Fields)
+            std::cout
+            << "Image Description " << imageEXIF.ImageDescription << "\n"
+            << "Image Resolution " << imageEXIF.ImageWidth << "x" << imageEXIF.ImageHeight << " pixels\n"
+            << "Camera Model " << imageEXIF.Make << " - " << imageEXIF.Model << "\n"
+            << "Focal Length " << imageEXIF.FocalLength << " mm" << std::endl;
+        //Open, read image, write image as JSON, next
+
+        cout << filename << endl;
     }
 
-    //While list !empty, iterate
-    while (!files.empty()) {
-
-    }
-
-    //Open, read image, write image as JSON, next
 
     //close and exit
 

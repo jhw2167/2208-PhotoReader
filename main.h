@@ -46,12 +46,13 @@
 #include <cstdlib>
 #include <random>
 
-	//Exception ops
+//Exception ops
 #include <exception>
 #include <stdexcept>
 
-//boost
+//Libs
 #include <boost/algorithm/string.hpp>
+#include "TinyEXIF.h"
 
 //Other
 #include <ctime>
