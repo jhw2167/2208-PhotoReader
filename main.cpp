@@ -15,23 +15,30 @@ bool validFile(fs::path file) {
     return !fs::is_directory(file) && ext_exists;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
     //Open a Directory with all images
     fs::path current = fs::current_path();
     fs::path path{ current.u8string() +"\\photos" };
+    string outFile = "out";
+    if (argc > 1)
+        path = fs::path(argv[1]);
+    if (argc > 2)
+        outFile = argv[2];
+
     if (!fs::exists(path) || !fs::is_directory(path)) {
         //Exit
         string msg = string("") + "No 'photos' folder found, please add a folder " +
-            "called " + path.u8string() + " with your images to the directory with " +
-            "this program. ";
+            "called " + path.filename().u8string() + " with your images to the directory with " +
+            "this program OR pass the full path to your photos directory.";
             std::cout << msg;
             return -1;
     }
     
+    std::cout << "Reading photos from: " << path << endl;
     //File writers
     std::filebuf fb;
-    fb.open("out.json", std::ios::out);
+    fb.open(outFile+".json", std::ios::out);
     std::ostream os(&fb);
     char delim = '[';
     //Get list of all image names
@@ -48,6 +55,7 @@ int main()
         
         Photo p = Photo();
         string name = filename.u8string();
+        p.filename = filename.u8string();
         p.title = name.substr(0, name.find(".", 0));
         if (ext == ".png") {
             if (!readPng(entry, p)) {

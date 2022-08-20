@@ -25,6 +25,7 @@ class CameraDetails {
 class Photo
 {
 	public:
+		string filename;
 		string title;
 		string description;
 		string resolution;
@@ -41,7 +42,7 @@ class Photo
 		void setPngValues(sf::Image img);
 		void setTitle(string title);
 
-		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Photo,
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Photo, filename,
 			title, description, resolution, location,
 			dateTime, details)
 };

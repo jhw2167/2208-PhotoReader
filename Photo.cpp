@@ -42,9 +42,11 @@ void Photo::setJpegValues(TinyEXIF::EXIFInfo exif) {
 	description = exif.ImageDescription;
 	resolution = toString(exif.ImageWidth) + "x" 
 		+ toString(exif.ImageHeight);
-	location = toString(loc.Latitude) + "," +
-		toString(loc.Longitude) + "," +
-		toString(loc.Altitude);
+	if (loc.hasLatLon())
+		location = toString(loc.Latitude) + "," +
+		toString(loc.Longitude);
+	if(loc.hasAltitude())
+		location += ","+toString(loc.Altitude);
 
 	if(!exif.DateTime.empty())
 		dateTime = exif.DateTime;
