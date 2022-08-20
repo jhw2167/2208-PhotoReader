@@ -30,6 +30,7 @@ class Photo
 		string description;
 		string resolution;
 		string location;	//lattitude, longitude, altitude
+		string friendlyLocation;
 		string dateTime;
 		CameraDetails details;
 
@@ -43,7 +44,7 @@ class Photo
 		void setTitle(string title);
 
 		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Photo, filename,
-			title, description, resolution, location,
+			title, description, resolution, location, friendlyLocation,
 			dateTime, details)
 };
 
