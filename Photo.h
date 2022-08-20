@@ -4,7 +4,7 @@
 
 class CameraDetails {
 
-	private: 
+	public:
 		string aperture;
 		string exposure;
 		string focalLength;
@@ -13,7 +13,6 @@ class CameraDetails {
 		string model;
 		string make;
 
-	public:
 		CameraDetails();
 		CameraDetails(TinyEXIF::EXIFInfo exif);
 		void setJpegValues(TinyEXIF::EXIFInfo exif);
@@ -25,15 +24,13 @@ class CameraDetails {
 
 class Photo
 {
-	private:
+	public:
 		string title;
 		string description;
 		string resolution;
 		string location;	//lattitude, longitude, altitude
 		string dateTime;
 		CameraDetails details;
-
-	public:
 
 		Photo();
 		Photo(TinyEXIF::EXIFInfo exif);

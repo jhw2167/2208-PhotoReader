@@ -40,11 +40,19 @@ void Photo::setJpegValues(TinyEXIF::EXIFInfo exif) {
 	TinyEXIF::EXIFInfo::Geolocation_t loc = exif.GeoLocation;
 
 	description = exif.ImageDescription;
-	resolution = exif.ImageHeight + "x" + exif.ImageWidth;
+	resolution = toString(exif.ImageWidth) + "x" 
+		+ toString(exif.ImageHeight);
 	location = toString(loc.Latitude) + "," +
 		toString(loc.Longitude) + "," +
 		toString(loc.Altitude);
-	dateTime = loc.GPSDateStamp + "T" + loc.GPSTimeStamp;
+
+	if(!exif.DateTime.empty())
+		dateTime = exif.DateTime;
+	else if(!exif.DateTimeOriginal.empty())
+		dateTime = exif.DateTimeOriginal;
+	else 
+		dateTime = exif.DateTimeDigitized;
+
 	details.setJpegValues(exif);
 }
 
