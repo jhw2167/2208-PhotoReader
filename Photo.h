@@ -32,6 +32,7 @@ class Photo
 		string location;	//lattitude, longitude, altitude
 		string friendlyLocation;
 		string dateTime;
+		string orientation;
 		CameraDetails details;
 
 		Photo();
@@ -45,6 +46,6 @@ class Photo
 
 		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Photo, filename,
 			title, description, resolution, location, friendlyLocation,
-			dateTime, details)
+			dateTime, orientation, details)
 };
 

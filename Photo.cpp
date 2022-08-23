@@ -55,6 +55,7 @@ void Photo::setJpegValues(TinyEXIF::EXIFInfo exif) {
 	else 
 		dateTime = exif.DateTimeDigitized;
 
+	orientation = exif.Orientation;
 	details.setJpegValues(exif);
 }
 
