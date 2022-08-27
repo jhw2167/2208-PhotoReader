@@ -97,10 +97,19 @@ boolean readJpeg(fs::path path, Photo& p) {
 
     // parse image EXIF and XMP metadata
     TinyEXIF::EXIFInfo imageEXIF(istream);
-    if (imageEXIF.Fields)
+    if (imageEXIF.Fields) {
         p.setJpegValues(imageEXIF);
-    else
-        return false;
+        if (boost::algorithm::contains(p.resolution, "0.00x") ||
+            boost::algorithm::contains(p.resolution, "x0.00") ) {
+            //std::cout << p.resolution.find("0.00");
+            readPng(path, p);
+        }
+
+    }
+    else {
+        return readPng(path, p);
+    }
+        
 
     if(CHECK_FIELDS)
         std::cout

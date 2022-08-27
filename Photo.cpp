@@ -39,6 +39,7 @@ void Photo::setJpegValues(TinyEXIF::EXIFInfo exif) {
 
 	TinyEXIF::EXIFInfo::Geolocation_t loc = exif.GeoLocation;
 
+
 	description = exif.ImageDescription;
 	resolution = toString(exif.ImageHeight) + "x" 
 		+ toString(exif.ImageWidth);
